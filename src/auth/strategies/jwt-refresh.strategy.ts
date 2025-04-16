@@ -9,7 +9,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(
   Strategy,
-  'fce91d20532ef9265e221d1553fffda3bc0a74dc9b86418717bdca9227549388438c2291c9deffb4eac00e92d65e66313c1eec58f548435ab83d73937739d05c',
+  '',
 ) {
   constructor(config: ConfigService, private prisma: PrismaService) {
     super({
@@ -18,7 +18,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
           return request?.cookies?.refresh_token;
         },
       ]),
-      secretOrKey: config.get('fce91d20532ef9265e221d1553fffda3bc0a74dc9b86418717bdca9227549388438c2291c9deffb4eac00e92d65e66313c1eec58f548435ab83d73937739d05c'),
+      secretOrKey: config.get(''),
       passReqToCallback: true,
     });
   }

@@ -13,7 +13,7 @@ export class PaymentsService {
     private prisma: PrismaService,
     private config: ConfigService, 
   ) {
-    const stripeKey = this.config.get<string>('sk_test_51RERSSRUgjEl191nY0U3PTd1cGo4dcqVVQhHIv4FhrU3lHh4uJHywqK98Jc6Z6P7G13DkZrlD1kv4fNUTJlRRFW000fchVWAUm');
+    const stripeKey = this.config.get<string>('');
     if (!stripeKey) {
       throw new Error('STRIPE_SECRET_KEY is not set');
     }
