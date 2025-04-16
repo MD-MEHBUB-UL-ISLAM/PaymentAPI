@@ -103,28 +103,7 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 Absolutely 💥 Let's turn this into a clean, modern, and eye-catching README for your **NestJS Auth & Payment API**. I'll use markdown best practices, improve structure, add a TOC, badge layout, emoji highlights, and make sure it's developer-friendly and *engaging*.
 
----
 
-```md
-<p align="center">
-  <a href="https://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="NestJS Logo" /></a>
-</p>
-
-<h1 align="center">Auth & Payment API with NestJS</h1>
-<p align="center">
-  Secure REST API for authentication and payments built with <b>NestJS, PostgreSQL, Prisma, JWT</b>, and <b>Stripe</b>.
-</p>
-
-<p align="center">
-  <a href="https://circleci.com/gh/nestjs/nest"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-  <a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-  <a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="License" /></a>
-  <a href="https://discord.gg/G7Qnnhy"><img src="https://img.shields.io/badge/Discord-Join%20Chat-brightgreen.svg" alt="Discord" /></a>
-  <a href="https://opencollective.com/nest"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate" /></a>
-</p>
-
----
 
 ## 🔖 Table of Contents
 
