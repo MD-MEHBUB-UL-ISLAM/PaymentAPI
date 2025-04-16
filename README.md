@@ -97,3 +97,197 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 "# PaymentSystem" 
+
+
+
+
+Auth & Payment API with NestJS
+NestJS
+PostgreSQL
+Prisma
+JWT
+
+A secure REST API for user authentication and payments built with NestJS, PostgreSQL, Prisma, and JWT authentication.
+
+Features
+User Authentication
+
+Registration with email/password
+
+Login with JWT tokens
+
+Refresh token mechanism
+
+Protected routes with role-based access (USER/ADMIN)
+
+Payments
+
+Stripe payment integration
+
+Transaction recording
+
+Payment status tracking
+
+Security
+
+Password hashing with bcrypt
+
+Rate limiting
+
+Secure cookie storage for tokens
+
+Input validation
+
+Tech Stack
+Backend: NestJS
+
+Database: PostgreSQL with Prisma ORM
+
+Authentication: JWT with Passport.js
+
+Payment: Stripe API
+
+Testing: Jest
+
+Prerequisites
+Node.js (v16+)
+
+PostgreSQL
+
+Docker (optional)
+
+Stripe account (for payment processing)
+
+Installation
+Clone the repository:
+
+bash
+Copy
+git clone https://github.com/yourusername/auth-payment-api.git
+cd auth-payment-api
+Install dependencies:
+
+bash
+Copy
+npm install
+Set up environment variables:
+
+bash
+Copy
+cp .env.example .env
+Edit the .env file with your configuration.
+
+Set up PostgreSQL database (see Database Setup)
+
+Run database migrations:
+
+bash
+Copy
+npx prisma migrate dev --name init
+Generate Prisma client:
+
+bash
+Copy
+npx prisma generate
+Database Setup
+Option 1: Local PostgreSQL
+Create a database:
+
+sql
+Copy
+CREATE DATABASE auth_payment_db;
+Update your .env file:
+
+Copy
+DATABASE_URL="postgresql://username:password@localhost:5432/auth_payment_db?schema=public"
+Option 2: Docker
+Run PostgreSQL container:
+
+bash
+Copy
+docker-compose up -d
+Running the Application
+Development mode:
+
+bash
+Copy
+npm run start:dev
+Production mode:
+
+bash
+Copy
+npm run build
+npm run start:prod
+API Endpoints
+Authentication
+Method	Endpoint	Description
+POST	/auth/register	Register new user
+POST	/auth/login	Login user
+POST	/auth/refresh	Refresh access token
+POST	/auth/logout	Logout user
+GET	/auth/me	Get current user info (protected)
+Payments
+Method	Endpoint	Description
+POST	/payments/checkout	Create payment intent
+GET	/payments/transactions	Get user transactions (protected)
+Testing
+Run unit tests:
+
+bash
+Copy
+npm run test
+Run e2e tests:
+
+bash
+Copy
+npm run test:e2e
+Docker Deployment
+Build the Docker image:
+
+bash
+Copy
+docker build -t auth-payment-api .
+Run the container:
+
+bash
+Copy
+docker run -p 3000:3000 --env-file .env auth-payment-api
+Environment Variables
+Variable	Description	Example
+DATABASE_URL	PostgreSQL connection URL	postgresql://user:pass@localhost:5432/db
+JWT_SECRET	Secret for JWT signing	your-secret-key
+JWT_EXPIRATION	Access token expiration time	3600s (1 hour)
+REFRESH_TOKEN_SECRET	Secret for refresh tokens	your-refresh-secret
+REFRESH_TOKEN_EXPIRATION	Refresh token expiration time	7d (7 days)
+STRIPE_SECRET_KEY	Stripe API secret key	sk_test_...
+Project Structure
+Copy
+src/
+├── auth/               # Authentication module
+│   ├── dto/            # Data transfer objects
+│   ├── strategies/     # Passport strategies
+│   ├── auth.service.ts # Business logic
+│   └── auth.controller.ts # Routes
+├── payments/           # Payments module
+├── prisma/             # Database configuration
+├── common/             # Shared utilities
+└── main.ts             # Application entry point
+Contributing
+Fork the project
+
+Create your feature branch (git checkout -b feature/AmazingFeature)
+
+Commit your changes (git commit -m 'Add some AmazingFeature')
+
+Push to the branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+License
+Distributed under the MIT License. See LICENSE for more information.
+
+Contact
+Email - mdmehbubulislam@gmail.com
+
+Project Link: https://github.com/MD-MEHBUB-UL-ISLAM/PaymentSystem
+
