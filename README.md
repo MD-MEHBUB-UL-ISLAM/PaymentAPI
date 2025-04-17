@@ -281,17 +281,6 @@ This project is [MIT licensed](LICENSE).
 
 ---
 
-Let me know if you'd like me to:
-- Add a badge for coverage or linting
-- Generate an OpenAPI/Swagger sample
-- Write a sample `.env.example`
-- Help you Dockerize the DB with Prisma migrations included
-
-Let’s keep this 🔥
-
-
-
----
 
 ## 📘 API Documentation: Authentication & Payments
 
