@@ -69,6 +69,9 @@ import { AtGuard } from 'src/common/decorators/guards/at.guard';
     @UseGuards(AtGuard)
     @Get('me')
     getMe(@GetCurrentUserId() userId: number) {
+      console.log("userId in getMe:", userId);  // Should no longer be undefined
       return this.authService.getMe(userId);
     }
+    
+
   }

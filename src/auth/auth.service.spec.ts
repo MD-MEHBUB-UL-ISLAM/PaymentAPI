@@ -13,6 +13,19 @@ describe('AuthService', () => {
   let jwtService: JwtService;
   let configService: ConfigService;
 
+  // Complete mock user type
+  const createMockUser = (overrides?: Partial<any>) => ({
+    id: 1,
+    email: 'test@example.com',
+    password: 'hashedPassword',
+    name: 'Test User',
+    role: Role.USER,
+    refreshToken: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    ...overrides,
+  });
+
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
@@ -63,13 +76,10 @@ describe('AuthService', () => {
         name: 'Test User',
       };
 
-      const mockUser = {
-        id: 1,
+      const mockUser = createMockUser({
         email: dto.email,
-        password: 'hashedPassword',
         name: dto.name,
-        role: Role.USER,
-      };
+      });
 
       const mockTokens = {
         access_token: 'accessToken',
@@ -114,12 +124,9 @@ describe('AuthService', () => {
         password: 'password',
       };
 
-      const mockUser = {
-        id: 1,
+      const mockUser = createMockUser({
         email: dto.email,
-        password: 'hashedPassword',
-        role: Role.USER,
-      };
+      });
 
       const mockTokens = {
         access_token: 'accessToken',
@@ -165,16 +172,12 @@ describe('AuthService', () => {
         password: 'password',
       };
 
-      const mockUser = {
-        id: 1,
+      const mockUser = createMockUser({
         email: dto.email,
-        password: 'hashedPassword',
-        role: Role.USER,
-      };
+      });
 
       jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(mockUser);
-      jest.spyOn(bcrypt, 'compare').mockImplementation(async () => false);
-
+      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
       const res = {
         cookie: jest.fn(),

@@ -9,9 +9,9 @@ import {
   import { JwtService } from '@nestjs/jwt';
   import { ConfigService } from '@nestjs/config';
   import { Response } from 'express';
-  import { Role } from '@prisma/client';
+
   import { AuthDto, AuthLoginDto } from './dto/auth.dto';
-  
+import { Role } from '@prisma/client';
   @Injectable()
   export class AuthService {
     constructor(
@@ -122,31 +122,33 @@ import {
       role: Role,
     ): Promise<{ access_token: string; refresh_token: string }> {
       const payload = {
-        sub: userId,
+        sub: userId,  // This should be included in the token payload
         email,
         role,
       };
-  
+    
       const accessToken = await this.jwt.signAsync(payload, {
         expiresIn: this.config.get('JWT_EXPIRATION'),
         secret: this.config.get('JWT_SECRET'),
       });
-  
+    
       const refreshToken = await this.jwt.signAsync(payload, {
         expiresIn: this.config.get('REFRESH_TOKEN_EXPIRATION'),
         secret: this.config.get('REFRESH_TOKEN_SECRET'),
       });
-  
+    
       return {
         access_token: accessToken,
         refresh_token: refreshToken,
       };
     }
+    
   
     async getMe(userId: number) {
+      console.log("userId:", userId);  // Add this to debug
       const user = await this.prisma.user.findUnique({
         where: {
-          id: userId,
+          id: userId,  // This is where the error occurs if userId is undefined
         },
         select: {
           id: true,
@@ -156,8 +158,11 @@ import {
           createdAt: true,
         },
       });
-  
+    
       if (!user) throw new ForbiddenException('User not found');
       return user;
     }
+    
+    
+    
   }

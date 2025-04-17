@@ -13,7 +13,8 @@ export class PaymentsService {
     private prisma: PrismaService,
     private config: ConfigService, 
   ) {
-    const stripeKey = this.config.get<string>('');
+    const stripeKey = this.config.get<string>('STRIPE_SECRET_KEY');
+
     if (!stripeKey) {
       throw new Error('STRIPE_SECRET_KEY is not set');
     }
@@ -56,15 +57,16 @@ export class PaymentsService {
       throw new ForbiddenException('Payment not found');
     }
 
-    const transaction = await this.prisma.transaction.update({
+    const transaction = await this.prisma.transaction.updateMany({
       where: {
-        id: paymentId, 
+        paymentId: paymentId, // use Stripe's paymentId (which is string)
         userId: userId,
       },
       data: {
         status: paymentIntent.status,
       },
     });
+    
 
     return transaction;
   }

@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:13
     environment:
-      POSTGRES_USER: youruser
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: database
       POSTGRES_DB: auth-payment-api
     ports:
@@ -12,7 +12,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U youruser -d auth-payment-api']
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d auth-payment-api']
       interval: 5s
       timeout: 5s
       retries: 5
