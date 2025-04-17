@@ -145,10 +145,10 @@ import { Role } from '@prisma/client';
     
   
     async getMe(userId: number) {
-      console.log("userId:", userId);  // Add this to debug
+      console.log("userId:", userId);  
       const user = await this.prisma.user.findUnique({
         where: {
-          id: userId,  // This is where the error occurs if userId is undefined
+          id: userId,  
         },
         select: {
           id: true,

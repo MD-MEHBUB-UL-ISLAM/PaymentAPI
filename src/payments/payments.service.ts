@@ -11,15 +11,20 @@ export class PaymentsService {
 
   constructor(
     private prisma: PrismaService,
-    private config: ConfigService, 
+    private config: ConfigService,
   ) {
     const stripeKey = this.config.get<string>('STRIPE_SECRET_KEY');
-
+  
     if (!stripeKey) {
       throw new Error('STRIPE_SECRET_KEY is not set');
     }
   
+    this.stripe = new Stripe(stripeKey, {
+      apiVersion: '2025-03-31.basil',
+    });
+    
   }
+  
   
 
   async createPayment(userId: number, dto: CreatePaymentDto) {
