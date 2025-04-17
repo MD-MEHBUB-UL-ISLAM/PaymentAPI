@@ -288,3 +288,179 @@ Let me know if you'd like me to:
 - Help you Dockerize the DB with Prisma migrations included
 
 Let’s keep this 🔥
+
+
+
+---
+
+## 📘 API Documentation: Authentication & Payments
+
+> **Base URL:** `http://localhost:3000`
+
+---
+
+## 🧾 **Endpoints**
+
+### ✅ Register a New User
+
+- **Method:** `POST`  
+- **URL:** `/auth/register`
+
+#### 🧠 Body (JSON)
+```json
+{
+  "email": "user@example.com",
+  "password": "password",
+  "name": "User Name"
+}
+```
+
+#### 🧪 How to Test (Postman)
+1. Open Postman.
+2. Create a new **POST** request.
+3. Set the URL to: `http://localhost:3000/auth/register`
+4. In the **Body** tab, choose **raw** → **JSON**, and paste the body above.
+5. Click **Send**.
+
+---
+
+### ✅ Login
+
+- **Method:** `POST`  
+- **URL:** `/auth/login`
+
+#### 🧠 Body (JSON)
+```json
+{
+  "email": "user@example.com",
+  "password": "password"
+}
+```
+
+#### 🧪 How to Test
+1. Set the URL: `http://localhost:3000/auth/login`
+2. Method: `POST`
+3. Body: raw → JSON → paste above JSON
+4. Click **Send**
+5. ✅ You will receive:
+   - `accessToken` (JWT)
+   - `refreshToken` (in cookies)
+
+---
+
+### ✅ Get Current User Info
+
+- **Method:** `GET`  
+- **URL:** `/auth/me`  
+- **Auth Required:** `accessToken` in `Authorization` header or cookie
+
+#### 🧪 How to Test
+1. After login, copy the `accessToken`.
+2. Set the URL: `http://localhost:3000/auth/me`
+3. Method: `GET`
+4. Go to **Headers** → add:
+   - `Authorization`: `Bearer YOUR_ACCESS_TOKEN`
+5. Click **Send**  
+✅ Returns current user’s data.
+
+---
+
+### ✅ Refresh Token
+
+- **Method:** `POST`  
+- **URL:** `/auth/refresh`  
+- **Auth Required:** `refreshToken` (sent as cookie)
+
+#### 🧪 How to Test
+1. After login, your cookies should include `refreshToken`.
+2. Set the URL: `http://localhost:3000/auth/refresh`
+3. Method: `POST`
+4. If using cookies in Postman:
+   - Cookies should be automatically handled if login was in the same session.
+   - Otherwise, manually set `refreshToken` in Postman cookies.
+5. Click **Send**
+✅ Returns a new `accessToken`.
+
+---
+
+### ✅ Logout
+
+- **Method:** `POST`  
+- **URL:** `/auth/logout`  
+- **Auth Required:** `accessToken` in headers
+
+#### 🧪 How to Test
+1. Set the URL: `http://localhost:3000/auth/logout`
+2. Method: `POST`
+3. Headers:
+   - `Authorization`: `Bearer YOUR_ACCESS_TOKEN`
+4. Click **Send**
+
+---
+
+## 💳 Payments
+
+### ✅ Create Payment
+
+- **Method:** `POST`  
+- **URL:** `/payments/checkout`  
+- **Auth Required:** `accessToken`
+
+#### 🧠 Body (JSON)
+```json
+{
+  "amount": 100,
+  "description": "Test payment"
+}
+```
+
+#### 🧪 How to Test
+1. Login and get the `accessToken`.
+2. Set the URL: `http://localhost:3000/payments/checkout`
+3. Method: `POST`
+4. Headers:
+   - `Authorization`: `Bearer YOUR_ACCESS_TOKEN`
+5. Body: raw → JSON → paste JSON above
+6. Click **Send**
+
+✅ You should get a Stripe session or confirmation response.
+
+---
+
+### ✅ Get Transactions
+
+- **Method:** `GET`  
+- **URL:** `/payments/transactions`  
+- **Auth Required:** `accessToken`
+
+#### 🧪 How to Test
+1. Set the URL: `http://localhost:3000/payments/transactions`
+2. Method: `GET`
+3. Headers:
+   - `Authorization`: `Bearer YOUR_ACCESS_TOKEN`
+4. Click **Send**
+✅ Returns all transactions for the user.
+
+---
+
+## 🔐 Authentication Summary
+
+| Endpoint         | Method | Auth Required      | Description                  |
+|------------------|--------|--------------------|------------------------------|
+| `/auth/register` | POST   | ❌ No               | Register new user            |
+| `/auth/login`    | POST   | ❌ No               | Login with email/password    |
+| `/auth/me`       | GET    | ✅ Access token     | Get current user info        |
+| `/auth/refresh`  | POST   | ✅ Refresh token    | Refresh access token         |
+| `/auth/logout`   | POST   | ✅ Access token     | Logout user                  |
+
+---
+
+## 💸 Payments Summary
+
+| Endpoint                     | Method | Auth Required   | Description                     |
+|------------------------------|--------|-----------------|---------------------------------|
+| `/payments/checkout`        | POST   | ✅ Access token  | Create a new payment            |
+| `/payments/transactions`    | GET    | ✅ Access token  | Get all user’s transactions     |
+
+---
+
